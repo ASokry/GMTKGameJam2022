@@ -11,7 +11,17 @@ public class PlayerMovement : MonoBehaviour
     private void Awake()
     {
         playerInputActions = new PlayerInputActions();
-        playerInputActions.Player.Move.Enable();
+        
+    }
+
+    private void OnEnable()
+    {
+        playerInputActions.Enable();
+    }
+
+    private void OnDisable()
+    {
+        playerInputActions.Disable();
     }
 
     private void FixedUpdate()
