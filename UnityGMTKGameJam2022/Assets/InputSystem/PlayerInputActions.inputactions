@@ -137,6 +137,17 @@
                 },
                 {
                     "name": "",
+                    "id": "34af7f73-04a4-4c9d-9209-8eaff01ba04e",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "9b6d5e44-79cb-4403-97e1-38deb01a7d37",
                     "path": "<Keyboard>/space",
                     "interactions": "Hold",
@@ -161,6 +172,17 @@
                 },
                 {
                     "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Gamepad",
+            "bindingGroup": "Gamepad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }
