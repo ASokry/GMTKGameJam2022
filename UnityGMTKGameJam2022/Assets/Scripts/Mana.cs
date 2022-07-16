@@ -8,7 +8,7 @@ public class Mana: MonoBehaviour
 
     public int GetManaValue() { return manaValue; }
 
-    public void SetManaValue(int mana)
+    public void GetManaValue(int mana)
     {
         manaValue = mana;
         if (manaValue <= 0) manaValue = 0;
