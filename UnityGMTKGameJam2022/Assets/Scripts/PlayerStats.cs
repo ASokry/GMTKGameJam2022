@@ -17,6 +17,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Awake()
     {
+        DontDestroyOnLoad(this.gameObject);
         if (!healthBar) Debug.LogError("Health Bar is Null!");
         if (!manaBar) Debug.LogError("Mana Bar is Null!");
     }

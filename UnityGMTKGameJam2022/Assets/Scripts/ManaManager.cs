@@ -19,6 +19,7 @@ public class ManaManager : MonoBehaviour
     private int spawnKey = 0;
 
     private int currentTotalManaValue = 0;
+    [SerializeField] private float manaSpawnPadding = 3f;
 
     private void Awake()
     {
@@ -84,7 +85,7 @@ public class ManaManager : MonoBehaviour
     private Vector2 RandomSpawnPointWithinScreen()
     {
         Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        Vector2 point = new Vector2(Random.Range(screenBounds.x,screenBounds.x*-1), Random.Range(screenBounds.y, screenBounds.y * -1));
+        Vector2 point = new Vector2(Random.Range(screenBounds.x - manaSpawnPadding, (screenBounds.x- manaSpawnPadding)* -1), Random.Range(screenBounds.y-manaSpawnPadding, (screenBounds.y-manaSpawnPadding) * -1));
         return point;
     }
 

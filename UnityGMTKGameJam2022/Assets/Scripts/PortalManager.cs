@@ -40,7 +40,7 @@ public class PortalManager : MonoBehaviour
             if (dice > (timeManager.GetCurrentTime()/timeManager.GetStartSecondsTime()) * wildPortalChance)
             {
                 print("wild");
-                spawnedPortal.GetComponent<Portal>().SetPortalSceneIndex(0);
+                spawnedPortal.GetComponent<Portal>().SetPortalSceneIndex(2);
             }
             else
             {
