@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class Portal : MonoBehaviour
 {
-    [Range(1,2)]
     [SerializeField] private int sceneIndexNum;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -26,5 +25,10 @@ public class Portal : MonoBehaviour
         {
             SceneManager.LoadScene(sceneIndexNum);
         }
+    }
+
+    public void SetPortalSceneIndex(int num)
+    {
+        sceneIndexNum = num;
     }
 }
