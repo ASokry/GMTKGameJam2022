@@ -9,6 +9,7 @@ public class Portal : MonoBehaviour
     [SerializeField] private string sceneName;
     public delegate void PortalAction();
     public static event PortalAction OnPortal;
+    public static event PortalAction OnWin;
     [SerializeField] private bool needsToRoll = false;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -27,8 +28,16 @@ public class Portal : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(sceneName);
-            if (OnPortal != null) OnPortal();
+            if (sceneName == "Win")
+            {
+                if (OnWin != null) OnWin();
+                SceneManager.LoadScene(sceneName);
+            }
+            else
+            {
+                SceneManager.LoadScene(sceneName);
+                if (OnPortal != null) OnPortal();
+            }
         }
     }
 
