@@ -9,7 +9,7 @@ public class IFrameHandler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerStats.GetComponentsInParent<PlayerStats>();
+        playerStats = GetComponentInParent<PlayerStats>();
     }
 
     public void SetIframesToFalse()
