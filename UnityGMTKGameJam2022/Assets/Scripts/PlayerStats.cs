@@ -15,17 +15,12 @@ public class PlayerStats : MonoBehaviour
     public int GetPlayerMana() { return currentMana; }
     public bool IsManaAtMax() { return currentMana == maxMana; }
 
-    private ManaManager manaManager;
-
     private void Awake()
     {
         healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Bar>();
         manaBar = GameObject.FindGameObjectWithTag("ManaBar").GetComponent<Bar>();
         if (!healthBar) Debug.LogError("Health Bar is Null!");
         if (!manaBar) Debug.LogError("Mana Bar is Null!");
-
-        manaManager = GameObject.FindGameObjectWithTag("ManaManager").GetComponent<ManaManager>();
-        if (manaManager == null) { Debug.LogError("ManaManager is not in Persistent Scene!"); }
 
         Portal.OnPortal += OnNewScene;
     }
@@ -75,6 +70,7 @@ public class PlayerStats : MonoBehaviour
 
     public void GainMana(int mana)
     {
+        //print("gain mana");
         currentMana += mana;
         if (currentMana > maxMana) currentMana = maxMana;
         if (manaBar) manaBar.SetValue(currentMana);
@@ -89,6 +85,8 @@ public class PlayerStats : MonoBehaviour
 
     private int CalculateManaToLose()
     {
+        ManaManager manaManager = GameObject.FindGameObjectWithTag("ManaManager").GetComponent<ManaManager>();
+        if (manaManager == null) { Debug.LogError("ManaManager is not in Persistent Scene!"); }
         int manaToLose = 0;
         List<Vector3Int> chart = manaManager.GetManaProgressChart();
         foreach (Vector3Int loss in chart)

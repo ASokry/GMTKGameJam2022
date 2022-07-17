@@ -33,7 +33,7 @@ public class ZoneManager : MonoBehaviour
 
     public string GetCurrentSceneName()
     {
-        print(SceneManager.GetActiveScene().name);
+        //print(SceneManager.GetActiveScene().name);
         return SceneManager.GetActiveScene().name;
     }
 }

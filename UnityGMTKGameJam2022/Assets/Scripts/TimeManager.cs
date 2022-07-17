@@ -12,6 +12,7 @@ public class TimeManager : MonoBehaviour
     private TextMeshProUGUI currentTimeText;
     private ZoneManager zoneManager;
     public bool SeeTimer = false;
+    private Animator border;
 
     private void Awake()
     {
@@ -20,12 +21,14 @@ public class TimeManager : MonoBehaviour
         if (currentTimeText == null) { Debug.LogError("Time text is not in Persistent Scene!"); }
         zoneManager = GameObject.FindGameObjectWithTag("ZoneManager").GetComponent<ZoneManager>();
         if (zoneManager == null) { Debug.LogError("Zone manager is not in Persistent Scene!"); }
+        border = GameObject.FindGameObjectWithTag("Border").GetComponent<Animator>();
         OnNewScene();
     }
 
     private void OnNewScene()
     {
         currentTime = startSecondsTime;
+        border.SetTrigger("stage1");
     }
 
     // Update is called once per frame
@@ -34,6 +37,7 @@ public class TimeManager : MonoBehaviour
         if (zoneManager.GetCurrentSceneName() == "wildzone" || zoneManager.GetCurrentSceneName() == "normalzone")
         {
             Timer();
+            BorderAnimation();
         }
     }
 
@@ -50,6 +54,31 @@ public class TimeManager : MonoBehaviour
         if(currentTimeText != null && SeeTimer)
         {
             currentTimeText.gameObject.SetActive(false);
+        }
+    }
+
+    private void BorderAnimation()
+    {
+        int percentage = Mathf.FloorToInt(currentTime / startSecondsTime * 100);
+        switch (percentage)
+        {
+            case 100:
+                border.SetTrigger("stage1");
+                break;
+            case 80:
+                border.SetTrigger("stage2");
+                break;
+            case 60:
+                border.SetTrigger("stage3");
+                break;
+            case 40:
+                border.SetTrigger("stage4");
+                break;
+            case 20:
+                border.SetTrigger("stage5");
+                break;
+            default:
+                break;
         }
     }
 

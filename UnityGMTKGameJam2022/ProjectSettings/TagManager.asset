@@ -14,6 +14,7 @@ TagManager:
   - ManaBar
   - Mana
   - ExitPortalButtonText
+  - Border
   layers:
   - Default
   - TransparentFX

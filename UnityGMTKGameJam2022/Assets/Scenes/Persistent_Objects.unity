@@ -286,9 +286,10 @@ GameObject:
   - component: {fileID: 272081462}
   - component: {fileID: 272081464}
   - component: {fileID: 272081463}
+  - component: {fileID: 272081465}
   m_Layer: 5
-  m_Name: Panel
-  m_TagString: Untagged
+  m_Name: Border
+  m_TagString: Border
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -326,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.9607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -351,6 +352,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272081461}
   m_CullTransparentMesh: 1
+--- !u!95 &272081465
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272081461}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6db8c9c36f6f45a478168cd27993640d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &279674539
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,7 +922,6 @@ MonoBehaviour:
   - {fileID: 8262067969310099090, guid: 043c9616048ec5343bdaad068108b803, type: 3}
   - {fileID: 1859365786629899557, guid: 57981d8d01413c84a86ac59422293d8e, type: 3}
   - {fileID: 7044227088925608715, guid: 493549af6b7e287478fb0081768b3cd1, type: 3}
-  totalManaValueToSpawn: 30
   manaSpawnPadding: 3
 --- !u!4 &1596333853
 Transform:
@@ -1502,7 +1522,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
-  m_WholeNumbers: 1
+  m_WholeNumbers: 0
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1617,7 +1637,7 @@ MonoBehaviour:
   m_Direction: 0
   m_MinValue: 0
   m_MaxValue: 1
-  m_WholeNumbers: 1
+  m_WholeNumbers: 0
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
