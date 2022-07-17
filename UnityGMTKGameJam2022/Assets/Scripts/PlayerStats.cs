@@ -97,16 +97,12 @@ public class PlayerStats : MonoBehaviour
             iFrames = true;
             Animator animator = GetComponentInChildren<Animator>();
             animator.SetTrigger("hit");
-            StartCoroutine(ResetIFrames());
         }
     }
 
-    private IEnumerator ResetIFrames()
+    public void ResetIFrames()
     {
-        yield return new WaitForSeconds(iFramesTime);
         iFrames = false;
-        //Animator animator = GetComponentInChildren<Animator>();
-        //animator.SetTrigger("hit");
     }
 
     public void GainMana(int mana)

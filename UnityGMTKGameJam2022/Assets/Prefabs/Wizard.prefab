@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 6513855228846544352}
   - component: {fileID: 3098722302531493586}
   - component: {fileID: 1496883033456760165}
-  - component: {fileID: 8851654861537744368}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Player
@@ -87,6 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  currentHealth: 0
   maxMana: 100
   currentMana: 0
   dropRadius: 3.5
@@ -154,6 +154,7 @@ GameObject:
   - component: {fileID: 6513855229186840429}
   - component: {fileID: 4666465020106962230}
   - component: {fileID: 8621105916410775952}
+  - component: {fileID: 7538840561421330516}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -287,3 +288,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+--- !u!114 &7538840561421330516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513855229186840431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ccc3ae0d66061c74e9ce7c1c2d973d92, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
