@@ -15,6 +15,18 @@ public class PortalManager : MonoBehaviour
     private Transform player;
     private ZoneManager zoneManager;
 
+    private bool canRoll = true;
+
+    private void Awake()
+    {
+        Portal.OnPortal += OnNewScene;
+    }
+
+    private void OnNewScene()
+    {
+        canRoll = true;
+    }
+
     private void Start()
     {
         timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
@@ -25,12 +37,12 @@ public class PortalManager : MonoBehaviour
         if (zoneManager == null) { Debug.LogError("Zone manager is not in Persistent Scene!"); }
     }
 
-    void FixedUpdate()
+    void Update()
     {
         if (zoneManager.GetCurrentSceneName() == "wildzone" || zoneManager.GetCurrentSceneName() == "normalzone")
         {
             SpawnPortalWithinTime(spawnTimeSeconds);
-            WildPortalChance();
+            StartCoroutine(WildPortalChance());
         }
     }
 
@@ -47,21 +59,31 @@ public class PortalManager : MonoBehaviour
         }
     }
 
-    private void WildPortalChance()
+    public void SetCanRollToTrue()
     {
-        if (spawnedPortal != null)
+        //print(true);
+        canRoll = true;
+    }
+
+    private IEnumerator WildPortalChance()
+    {
+        if (spawnedPortal != null && canRoll)
         {
             float dice = Random.Range(0f, 100f);
             if (dice > (timeManager.GetCurrentTime()/timeManager.GetStartSecondsTime()) * wildPortalChance)
             {
-                print("wild");
+                //print("wild");
+                canRoll = false;
+                spawnedPortal.GetComponent<Animator>().SetBool("isWild", true);
                 spawnedPortal.GetComponent<Portal>().SetPortalSceneName("wildzone");
             }
             else
             {
-                print("not wild");
+                //print("not wild");
+                spawnedPortal.GetComponent<Animator>().SetBool("isWild", false);
                 spawnedPortal.GetComponent<Portal>().SetPortalSceneName("normalzone");
             }
+            yield return new WaitForSeconds(3f);
         }
     }
 
