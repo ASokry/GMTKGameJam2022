@@ -10,4 +10,9 @@ public class Start : MonoBehaviour
         SceneManager.LoadScene("normalzone");
         SceneManager.LoadScene("Persistent_Objects", LoadSceneMode.Additive);
     }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
 }
