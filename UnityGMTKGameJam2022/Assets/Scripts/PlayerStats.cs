@@ -95,7 +95,8 @@ public class PlayerStats : MonoBehaviour
             manaManager.SpawnManaInRadius(transform.position, dropRadius, CalculateManaToRegain());
             LoseMana(CalculateManaToLose());
             iFrames = true;
-            transform.localScale *= 0.5f;
+            Animator animator = GetComponentInChildren<Animator>();
+            animator.SetTrigger("hit");
             StartCoroutine(ResetIFrames());
         }
     }
@@ -104,7 +105,8 @@ public class PlayerStats : MonoBehaviour
     {
         yield return new WaitForSeconds(iFramesTime);
         iFrames = false;
-        transform.localScale /= 0.5f;
+        //Animator animator = GetComponentInChildren<Animator>();
+        //animator.SetTrigger("hit");
     }
 
     public void GainMana(int mana)
