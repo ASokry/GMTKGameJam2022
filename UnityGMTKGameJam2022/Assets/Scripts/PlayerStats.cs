@@ -31,6 +31,11 @@ public class PlayerStats : MonoBehaviour
         Portal.OnPortal += OnNewScene;
     }
 
+    private void OnDestroy()
+    {
+        Portal.OnPortal -= OnNewScene;
+    }
+
     private void OnNewScene()
     {
         ReCenter();

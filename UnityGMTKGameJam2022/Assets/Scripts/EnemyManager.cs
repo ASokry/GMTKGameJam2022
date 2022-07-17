@@ -11,7 +11,7 @@ public class EnemyManager : MonoBehaviour
     private int zoneCount = 0;
     private List<int> enemyProgressChart = new List<int>()
     {
-        2,2,3,3,3,3,4,4,4,5
+        0,1,2,2,3,3,3,3,4,4
     };
 
     private void Awake()
