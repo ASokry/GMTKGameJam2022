@@ -30,7 +30,11 @@ public class ZoneManager : MonoBehaviour
 
     public static void GoToLoseScene()
     {
-        if (OnLose != null) OnLose();
+        if (OnLose != null)
+        {
+            print("destory!! ");
+            OnLose();
+        }
         SceneManager.LoadScene("Lose"); // Go to lose scene
     }
 
