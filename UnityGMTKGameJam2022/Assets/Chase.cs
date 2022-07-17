@@ -36,9 +36,14 @@ public class Chase : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         enemy = GetComponent<Enemy>();
 
-        canChase = enemy.Target ? true : false;
+        
         gizmo_dir = transform.position;
         gizmo_velocity = transform.position;
+    }
+
+    private void Start()
+    {
+        canChase = enemy.Target ? true : false;
     }
 
     private void Update()

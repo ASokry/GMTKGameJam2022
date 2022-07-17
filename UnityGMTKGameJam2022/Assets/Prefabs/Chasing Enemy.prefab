@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canChase: 0
-  speed: 5
+  speed: 2
   smoothChase: 0
   maxAcceleration: 5
   resetVelocityRange: 10
