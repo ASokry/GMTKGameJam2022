@@ -16,6 +16,11 @@ public class DontDestroy : MonoBehaviour
 
     private void SelfDestroy()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        ZoneManager.OnLose -= SelfDestroy;
     }
 }

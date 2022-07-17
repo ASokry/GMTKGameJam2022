@@ -27,6 +27,11 @@ public class PortalManager : MonoBehaviour
         canRoll = true;
     }
 
+    private void OnDestroy()
+    {
+        Portal.OnPortal -= OnNewScene;
+    }
+
     private void Start()
     {
         timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();

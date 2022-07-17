@@ -65,6 +65,11 @@ public class ManaManager : MonoBehaviour
         StartCoroutine(ManaSpawnRoutine());
     }
 
+    private void OnDestroy()
+    {
+        Portal.OnPortal -= OnNewScene;
+    }
+
     private void Start()
     {
         for (int m = 0; m < manaValues.Length; m++)

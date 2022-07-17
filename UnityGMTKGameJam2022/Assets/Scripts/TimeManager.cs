@@ -36,6 +36,11 @@ public class TimeManager : MonoBehaviour
         border.SetTrigger("stage1");
     }
 
+    private void OnDestroy()
+    {
+        Portal.OnPortal -= OnNewScene;
+    }
+
     // Update is called once per frame
     void Update()
     {
