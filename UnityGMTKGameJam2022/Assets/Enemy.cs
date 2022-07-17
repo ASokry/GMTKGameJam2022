@@ -8,6 +8,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Transform _target;
     public Transform Target { get { return _target; } set { _target = value; } }
 
+    private void Awake()
+    {
+        Target = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.transform.tag == "Player")
