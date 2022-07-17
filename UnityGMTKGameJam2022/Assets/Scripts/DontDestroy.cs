@@ -8,4 +8,14 @@ public class DontDestroy : MonoBehaviour
     {
         DontDestroyOnLoad(this.gameObject);
     }
+
+    private void Awake()
+    {
+        ZoneManager.OnLose += SelfDestroy;
+    }
+
+    private void SelfDestroy()
+    {
+        Destroy(this.gameObject);
+    }
 }

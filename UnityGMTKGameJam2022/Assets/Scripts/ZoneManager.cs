@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 public class ZoneManager : MonoBehaviour
 {
     private TimeManager timeManager;
+    public delegate void LoseAction();
+    public static event LoseAction OnLose;
 
     private void Start()
     {
@@ -28,6 +30,7 @@ public class ZoneManager : MonoBehaviour
 
     public static void GoToLoseScene()
     {
+        if (OnLose != null) OnLose();
         SceneManager.LoadScene("Lose"); // Go to lose scene
     }
 

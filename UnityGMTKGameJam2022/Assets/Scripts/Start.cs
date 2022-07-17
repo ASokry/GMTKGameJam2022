@@ -15,4 +15,9 @@ public class Start : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Start");
+    }
 }
