@@ -9,6 +9,7 @@ public class Portal : MonoBehaviour
     [SerializeField] private string sceneName;
     public delegate void PortalAction();
     public static event PortalAction OnPortal;
+    [SerializeField] private bool needsToRoll = false;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -39,5 +40,14 @@ public class Portal : MonoBehaviour
     public void SetPortalSceneName(string str)
     {
         sceneName = str;
+    }
+
+    public void SetRollToTrue()
+    {
+        if (needsToRoll)
+        {
+            PortalManager portalManager = GameObject.FindGameObjectWithTag("PortalManager").GetComponent<PortalManager>();
+            portalManager.SetCanRollToTrue();
+        }
     }
 }

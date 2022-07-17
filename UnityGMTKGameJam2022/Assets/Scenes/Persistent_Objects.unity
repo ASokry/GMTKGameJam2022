@@ -402,7 +402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9375168efc2faf428966d15dd146b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTimeSeconds: 15
+  spawnTimeSeconds: 10
   portalPrefab: {fileID: 622048079776676729, guid: 9ae8792d6ce00be4e9f3e4deb58e839d, type: 3}
   portalSpawnPadding: 3
   wildPortalChance: 150
@@ -1099,7 +1099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerActive: 1
-  startSecondsTime: 30
+  startSecondsTime: 100
   SeeTimer: 1
 --- !u!4 &1768442401
 Transform:
@@ -1697,13 +1697,5 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6513855228846544355, guid: 48c34f8f211e70f4388272451d23f150, type: 3}
-      propertyPath: manaBar
-      value: 
-      objectReference: {fileID: 2048714961}
-    - target: {fileID: 6513855228846544355, guid: 48c34f8f211e70f4388272451d23f150, type: 3}
-      propertyPath: healthBar
-      value: 
-      objectReference: {fileID: 1961891186}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48c34f8f211e70f4388272451d23f150, type: 3}

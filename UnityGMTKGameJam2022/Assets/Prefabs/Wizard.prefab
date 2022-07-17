@@ -63,7 +63,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b463626a2eac6664f89466bcc5f1a3a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canTeloport: 0
   exitPortalPrefab: {fileID: 8657262872681313746, guid: c1800a119d9933a4799b112a16549a86, type: 3}
   exitPortalSpawnPoint: {fileID: 0}
   radius: 3.5
@@ -79,8 +78,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c19a76e86e5762442a1a88f7dd8b9b8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 3
   maxMana: 100
+  currentMana: 0
 --- !u!50 &6513855228846544352
 Rigidbody2D:
   serializedVersion: 4
@@ -151,6 +151,7 @@ GameObject:
   - component: {fileID: 6513855229186840428}
   - component: {fileID: 6513855229186840434}
   - component: {fileID: 6513855229186840429}
+  - component: {fileID: 4666465020106962230}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -245,3 +246,29 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!61 &4666465020106962230
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6513855229186840431}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.75, y: 1.0625}
+    newSize: {x: 0.75, y: 1.0625}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.55, y: 1}
+  m_EdgeRadius: 0

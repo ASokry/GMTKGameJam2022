@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     private Bar healthBar;
-    [SerializeField] private int maxHealth = 100;
+    [SerializeField] private int maxHealth = 3;
     private int currentHealth = 0;
 
     private Bar manaBar;
