@@ -74,7 +74,7 @@ public class PortalManager : MonoBehaviour
     {
         if (spawnedPortal != null && canRoll)
         {
-            int dice = Mathf.FloorToInt(Random.Range(0f, 10f));
+            int dice = Mathf.FloorToInt(Random.Range(0f, 30f));
             if (zoneManager.GetCurrentSceneName() == "wildzone")
             {
                 spawnedPortal.GetComponent<Animator>().SetBool("isWild", false);
