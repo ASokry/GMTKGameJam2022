@@ -12,6 +12,7 @@ public class DontDestroy : MonoBehaviour
     private void Awake()
     {
         ZoneManager.OnLose += SelfDestroy;
+        Portal.OnWin += SelfDestroy;
     }
 
     private void SelfDestroy()
@@ -22,5 +23,6 @@ public class DontDestroy : MonoBehaviour
     private void OnDestroy()
     {
         ZoneManager.OnLose -= SelfDestroy;
+        Portal.OnWin -= SelfDestroy;
     }
 }
