@@ -7,11 +7,16 @@ using System;
 public class TimeManager : MonoBehaviour
 {
     [SerializeField] private bool timerActive = false;
-    private float currentTime = 0f;
     [SerializeField] private int startSecondsTime;
+
+    [Header("Debug")]
+    public bool SeeTimer = false;
+    [SerializeField] private float timeLeft = 0f;
+    [SerializeField] private float zoneStability = 1;
+    [SerializeField] private int stage = 0;
+
     private TextMeshProUGUI currentTimeText;
     private ZoneManager zoneManager;
-    public bool SeeTimer = false;
     private Animator border;
 
     private void Awake()
@@ -27,7 +32,7 @@ public class TimeManager : MonoBehaviour
 
     private void OnNewScene()
     {
-        currentTime = startSecondsTime;
+        timeLeft = startSecondsTime;
         border.SetTrigger("stage1");
     }
 
@@ -43,11 +48,11 @@ public class TimeManager : MonoBehaviour
 
     private void Timer()
     {
-        if (timerActive && currentTime > 0 && currentTimeText != null)
+        if (timerActive && timeLeft > 0 && currentTimeText != null)
         {
             currentTimeText.gameObject.SetActive(true);
-            currentTime -= Time.deltaTime;
-            TimeSpan time = TimeSpan.FromSeconds(currentTime);
+            timeLeft -= Time.deltaTime;
+            TimeSpan time = TimeSpan.FromSeconds(timeLeft);
             currentTimeText.text = time.Minutes.ToString() + ":" + time.Seconds.ToString();
         }
         
@@ -59,32 +64,21 @@ public class TimeManager : MonoBehaviour
 
     private void BorderAnimation()
     {
-        int percentage = Mathf.FloorToInt(currentTime / startSecondsTime * 100);
-        switch (percentage)
+        if(zoneStability > 0)
         {
-            case 100:
-                border.SetTrigger("stage1");
-                break;
-            case 80:
-                border.SetTrigger("stage2");
-                break;
-            case 60:
-                border.SetTrigger("stage3");
-                break;
-            case 40:
-                border.SetTrigger("stage4");
-                break;
-            case 20:
-                border.SetTrigger("stage5");
-                break;
-            default:
-                break;
+            //print("timeLeft " + timeLeft + " <= " + Mathf.Pow(startSecondsTime, zoneStability) + " = " + (timeLeft <= Mathf.Pow(startSecondsTime, zoneStability)));
+            if (timeLeft <= Mathf.Pow(startSecondsTime, zoneStability))
+            {
+                zoneStability -= .2f;
+                border.SetTrigger("stage" + ++stage);
+            }
         }
+        
     }
 
     public float GetCurrentTime()
     {
-        return currentTime;
+        return timeLeft;
     }
 
     public int GetStartSecondsTime()
@@ -95,7 +89,7 @@ public class TimeManager : MonoBehaviour
     public void SetTimer(int time)
     {
         startSecondsTime = time;
-        currentTime = startSecondsTime;
+        timeLeft = startSecondsTime;
     }
 
     public void SetActiveTimer(bool b)
