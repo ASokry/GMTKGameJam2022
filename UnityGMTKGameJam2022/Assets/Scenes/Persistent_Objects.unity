@@ -305,10 +305,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9375168efc2faf428966d15dd146b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTimeSeconds: 20
+  spawnTimeSeconds: 16
   portalPrefab: {fileID: 622048079776676729, guid: 9ae8792d6ce00be4e9f3e4deb58e839d, type: 3}
-  portalSpawnPadding: 3
-  wildPortalChance: 50
+  portalSpawnPadding: 5
+  wildPortalChance: 150
   canRoll: 1
 --- !u!4 &279674541
 Transform:
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerActive: 1
-  startSecondsTime: 60
+  startSecondsTime: 30
   SeeTimer: 1
   timeLeft: 0
   zoneStability: 1
@@ -1628,6 +1628,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1676802159}
     m_Modifications:
+    - target: {fileID: 8470603562688293048, guid: d0d3b12ef7d9117488cac6f1f815c444, type: 3}
+      propertyPath: m_Color.a
+      value: 0.8862745
+      objectReference: {fileID: 0}
     - target: {fileID: 8470603562688293049, guid: d0d3b12ef7d9117488cac6f1f815c444, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
