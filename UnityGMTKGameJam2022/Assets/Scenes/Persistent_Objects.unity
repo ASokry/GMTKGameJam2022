@@ -305,10 +305,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9375168efc2faf428966d15dd146b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTimeSeconds: 20
+  spawnTimeSeconds: 16
   portalPrefab: {fileID: 622048079776676729, guid: 9ae8792d6ce00be4e9f3e4deb58e839d, type: 3}
-  portalSpawnPadding: 3
-  wildPortalChance: 50
+  portalSpawnPadding: 5
+  wildPortalChance: 150
   canRoll: 1
 --- !u!4 &279674541
 Transform:
@@ -1022,7 +1022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerActive: 1
-  startSecondsTime: 60
+  startSecondsTime: 30
   SeeTimer: 1
   timeLeft: 0
   zoneStability: 1
