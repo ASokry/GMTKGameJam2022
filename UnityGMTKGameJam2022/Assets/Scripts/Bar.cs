@@ -16,6 +16,7 @@ public class Bar : MonoBehaviour
 
     public void SetValue(int val)
     {
+        //print("set");
         if (val <= slider.maxValue && val >= 0)
         {
             slider.value = val;
@@ -24,6 +25,7 @@ public class Bar : MonoBehaviour
 
     public void SetMaxValue(int maxVal)
     {
+        //print("set max");
         slider.maxValue = maxVal;
     }
 }

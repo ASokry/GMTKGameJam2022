@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 public class Portal : MonoBehaviour
 {
     [SerializeField] private int sceneIndexNum;
+    [SerializeField] private string sceneName;
+    public delegate void PortalAction();
+    public static event PortalAction OnPortal;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -23,12 +26,18 @@ public class Portal : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(sceneIndexNum);
+            if(OnPortal != null) OnPortal();
+            SceneManager.LoadScene(sceneName);
         }
     }
 
     public void SetPortalSceneIndex(int num)
     {
         sceneIndexNum = num;
+    }
+
+    public void SetPortalSceneName(string str)
+    {
+        sceneName = str;
     }
 }

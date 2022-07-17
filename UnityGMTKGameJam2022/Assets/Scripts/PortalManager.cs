@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PortalManager : MonoBehaviour
 {
-    public TimeManager timeManager;
+    private TimeManager timeManager;
     [SerializeField] private int spawnTimeSeconds = 0;
     [SerializeField] private GameObject portalPrefab;
     private GameObject spawnedPortal = null;
@@ -12,11 +12,26 @@ public class PortalManager : MonoBehaviour
     [SerializeField] private float portalSpawnPadding = 5f;
     [SerializeField] private float wildPortalChance = 150f;
 
-    // Update is called once per frame
+    private Transform player;
+    private ZoneManager zoneManager;
+
+    private void Start()
+    {
+        timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
+        if (timeManager == null) { Debug.LogError("Time Manager is not in Persistent Scene!"); }
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        if (player == null) { Debug.LogError("Player is not in Persistent Scene!"); }
+        zoneManager = GameObject.FindGameObjectWithTag("ZoneManager").GetComponent<ZoneManager>();
+        if (zoneManager == null) { Debug.LogError("Zone manager is not in Persistent Scene!"); }
+    }
+
     void FixedUpdate()
     {
-        SpawnPortalWithinTime(spawnTimeSeconds);
-        WildPortalChance();
+        if (zoneManager.GetCurrentSceneName() == "wildzone" || zoneManager.GetCurrentSceneName() == "normalzone")
+        {
+            SpawnPortalWithinTime(spawnTimeSeconds);
+            WildPortalChance();
+        }
     }
 
     private void SpawnPortalWithinTime(int time)
@@ -40,12 +55,12 @@ public class PortalManager : MonoBehaviour
             if (dice > (timeManager.GetCurrentTime()/timeManager.GetStartSecondsTime()) * wildPortalChance)
             {
                 print("wild");
-                spawnedPortal.GetComponent<Portal>().SetPortalSceneIndex(2);
+                spawnedPortal.GetComponent<Portal>().SetPortalSceneName("wildzone");
             }
             else
             {
                 print("not wild");
-                spawnedPortal.GetComponent<Portal>().SetPortalSceneIndex(1);
+                spawnedPortal.GetComponent<Portal>().SetPortalSceneName("normalzone");
             }
         }
     }
@@ -58,7 +73,12 @@ public class PortalManager : MonoBehaviour
     private Vector2 RandomSpawnPointWithinScreen()
     {
         Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        Vector2 point = new Vector2(Random.Range(screenBounds.x - portalSpawnPadding, (screenBounds.x - portalSpawnPadding) * -1), Random.Range(screenBounds.y - portalSpawnPadding, (screenBounds.y - portalSpawnPadding) * -1));
+        float xRangeMax = player.position.x > 0 ? player.position.x : screenBounds.x * -1;
+        float xRangeMin = player.position.x > 0 ? screenBounds.x : player.position.x;
+        float yRangeMax = player.position.y > 0 ? player.position.y : screenBounds.y * -1;
+        float yRangeMin = player.position.y > 0 ? screenBounds.y : player.position.y;
+
+        Vector2 point = new Vector2(Random.Range(xRangeMin - portalSpawnPadding, xRangeMax + portalSpawnPadding), Random.Range(yRangeMin - portalSpawnPadding, yRangeMax+portalSpawnPadding));
         return point;
     }
 }
