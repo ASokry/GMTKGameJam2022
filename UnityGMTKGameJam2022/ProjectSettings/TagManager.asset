@@ -13,6 +13,7 @@ TagManager:
   - HealthBar
   - ManaBar
   - Mana
+  - ExitPortalButtonText
   layers:
   - Default
   - TransparentFX

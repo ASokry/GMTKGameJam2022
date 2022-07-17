@@ -14,7 +14,21 @@ public class ManaManager : MonoBehaviour
     private int[] manaValues = new int[] { 1, 5, 10, 50 };
     private Dictionary<int, GameObject> manaDictionary = new Dictionary<int, GameObject>();
 
-    [SerializeField] private int totalManaValueToSpawn = 18;
+    private List<Vector3Int> manaProgressChart = new List<Vector3Int>()
+    {
+        new Vector3Int(18,9,4),
+        new Vector3Int(34,15,6),
+        new Vector3Int(52,22,9),
+        new Vector3Int(75,29,12),
+        new Vector3Int(102,36,15),
+        new Vector3Int(134,45,18),
+        new Vector3Int(173,54,22),
+        new Vector3Int(219,65,26),
+        new Vector3Int(275,76,31),
+        new Vector3Int(342,90,36)
+    };
+    private int zoneNum = 0;
+    private int totalManaValueToSpawn;
     private List<int> manaValuesToSpawn = new List<int>();
     private int spawnKey = 0;
     private GameObject manaParent;
@@ -24,8 +38,11 @@ public class ManaManager : MonoBehaviour
 
     private ZoneManager zoneManager;
 
+    public List<Vector3Int> GetManaProgressChart() { return manaProgressChart; }
+    public int GetTotalManaValueToSpawn() { return totalManaValueToSpawn; }
     private void Awake()
     {
+        totalManaValueToSpawn = manaProgressChart[zoneNum].x;
         if (manaPrefabList.Count != manaValues.Length)
         {
             Debug.LogError("Mana Prefab list does not match amount of Mana Values!");
@@ -39,9 +56,11 @@ public class ManaManager : MonoBehaviour
     {
         StopCoroutine(ManaSpawnRoutine());
         spawnKey = 0;
+        zoneNum++;
+        totalManaValueToSpawn = manaProgressChart[zoneNum].x;
         //manaParent = GameObject.FindGameObjectWithTag("ManaParent");
         //if (manaParent == null) { Debug.LogError("Mana Parent is not in other Scene!"); }
-        
+
         manaValuesToSpawn = BreakDownManaValues(totalManaValueToSpawn);
         StartCoroutine(ManaSpawnRoutine());
     }
@@ -65,15 +84,15 @@ public class ManaManager : MonoBehaviour
             int value = 0;
             if (remainingValue >= 50)
             {
-                value = manaValues[Random.Range(0, manaValues.Length-1)];
+                value = manaValues[Mathf.FloorToInt(Random.Range(2, manaValues.Length-1))];
             }
             else if (remainingValue >= 10)
             {
-                value = manaValues[Random.Range(0, manaValues.Length-2)];
+                value = manaValues[Mathf.FloorToInt(Random.Range(1, manaValues.Length-2))];
             }
             else if (remainingValue >= 5)
             {
-                value = manaValues[Random.Range(0, manaValues.Length-3)];
+                value = manaValues[Mathf.FloorToInt(Random.Range(0, manaValues.Length-3))];
             }
             else if (remainingValue >= 1)
             {
