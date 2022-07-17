@@ -740,6 +740,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainCamera: {fileID: 0}
+  bounciness: 0.5
 --- !u!1 &1027129999
 GameObject:
   m_ObjectHideFlags: 0
@@ -1741,6 +1742,14 @@ PrefabInstance:
     - target: {fileID: 6513855228846544354, guid: 48c34f8f211e70f4388272451d23f150, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6513855229186840429, guid: 48c34f8f211e70f4388272451d23f150, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5b619ce06c180c0439111e5f02913de6, type: 2}
+    - target: {fileID: 8621105916410775952, guid: 48c34f8f211e70f4388272451d23f150, type: 3}
+      propertyPath: speed
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 48c34f8f211e70f4388272451d23f150, type: 3}
