@@ -15,6 +15,7 @@ TagManager:
   - Mana
   - ExitPortalButtonText
   - Border
+  - EnemyManager
   layers:
   - Default
   - TransparentFX

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6513855228846544352}
   - component: {fileID: 3098722302531493586}
   - component: {fileID: 1496883033456760165}
+  - component: {fileID: 8851654861537744368}
   m_Layer: 0
   m_Name: Wizard
   m_TagString: Player
@@ -88,6 +89,9 @@ MonoBehaviour:
   maxHealth: 3
   maxMana: 100
   currentMana: 0
+  dropRadius: 3.5
+  iFrames: 0
+  iFramesTime: 2
 --- !u!50 &6513855228846544352
 Rigidbody2D:
   serializedVersion: 4

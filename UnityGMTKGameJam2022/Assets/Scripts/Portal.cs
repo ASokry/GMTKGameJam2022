@@ -27,8 +27,8 @@ public class Portal : MonoBehaviour
         }
         else
         {
-            if(OnPortal != null) OnPortal();
             SceneManager.LoadScene(sceneName);
+            if (OnPortal != null) OnPortal();
         }
     }
 

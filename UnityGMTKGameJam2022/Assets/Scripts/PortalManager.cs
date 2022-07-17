@@ -15,7 +15,7 @@ public class PortalManager : MonoBehaviour
     private Transform player;
     private ZoneManager zoneManager;
 
-    private bool canRoll = true;
+    [SerializeField] private bool canRoll = true;
 
     private void Awake()
     {
@@ -42,7 +42,7 @@ public class PortalManager : MonoBehaviour
         if (zoneManager.GetCurrentSceneName() == "wildzone" || zoneManager.GetCurrentSceneName() == "normalzone")
         {
             SpawnPortalWithinTime(spawnTimeSeconds);
-            StartCoroutine(WildPortalChance());
+            WildPortalChance();
         }
     }
 
@@ -54,7 +54,7 @@ public class PortalManager : MonoBehaviour
         }
         else if (timeManager.GetCurrentTime() <= timeManager.GetStartSecondsTime() - time && spawnedPortal == null)
         {
-            print(timeManager.GetCurrentTime() + ", " + timeManager.GetStartSecondsTime());
+            //print(timeManager.GetCurrentTime() + ", " + timeManager.GetStartSecondsTime());
             SpawnPortal();
         }
     }
@@ -65,12 +65,17 @@ public class PortalManager : MonoBehaviour
         canRoll = true;
     }
 
-    private IEnumerator WildPortalChance()
+    private void WildPortalChance()
     {
         if (spawnedPortal != null && canRoll)
         {
-            float dice = Random.Range(0f, 100f);
-            if (dice > (timeManager.GetCurrentTime()/timeManager.GetStartSecondsTime()) * wildPortalChance)
+            int dice = Mathf.FloorToInt(Random.Range(0f, 100f));
+            if (zoneManager.GetCurrentSceneName() == "wildzone")
+            {
+                spawnedPortal.GetComponent<Animator>().SetBool("isWild", false);
+                spawnedPortal.GetComponent<Portal>().SetPortalSceneName("normalzone");
+            }
+            else if (dice >= Mathf.FloorToInt(timeManager.GetCurrentTime() / timeManager.GetStartSecondsTime() * wildPortalChance))
             {
                 //print("wild");
                 canRoll = false;
@@ -79,11 +84,10 @@ public class PortalManager : MonoBehaviour
             }
             else
             {
-                //print("not wild");
                 spawnedPortal.GetComponent<Animator>().SetBool("isWild", false);
                 spawnedPortal.GetComponent<Portal>().SetPortalSceneName("normalzone");
             }
-            yield return new WaitForSeconds(3f);
+            print(dice> Mathf.FloorToInt(timeManager.GetCurrentTime() / timeManager.GetStartSecondsTime() * wildPortalChance));
         }
     }
 
@@ -95,12 +99,13 @@ public class PortalManager : MonoBehaviour
     private Vector2 RandomSpawnPointWithinScreen()
     {
         Vector2 screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
-        float xRangeMax = player.position.x > 0 ? player.position.x : screenBounds.x * -1;
-        float xRangeMin = player.position.x > 0 ? screenBounds.x : player.position.x;
-        float yRangeMax = player.position.y > 0 ? player.position.y : screenBounds.y * -1;
-        float yRangeMin = player.position.y > 0 ? screenBounds.y : player.position.y;
+        print(screenBounds);
+        float xRangeMax = player.position.x > 0 ? player.position.x : screenBounds.x;
+        float xRangeMin = player.position.x > 0 ? screenBounds.x*-1 : player.position.x;
+        float yRangeMax = player.position.y > 0 ? player.position.y : screenBounds.y;
+        float yRangeMin = player.position.y > 0 ? screenBounds.y*-1 : player.position.y;
 
-        Vector2 point = new Vector2(Random.Range(xRangeMin - portalSpawnPadding, xRangeMax + portalSpawnPadding), Random.Range(yRangeMin - portalSpawnPadding, yRangeMax+portalSpawnPadding));
+        Vector2 point = new Vector2(Random.Range(xRangeMin + portalSpawnPadding, xRangeMax - portalSpawnPadding), Random.Range(yRangeMin + portalSpawnPadding, yRangeMax-portalSpawnPadding));
         return point;
     }
 }
