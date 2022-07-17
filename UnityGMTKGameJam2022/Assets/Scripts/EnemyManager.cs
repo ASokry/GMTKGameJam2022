@@ -33,6 +33,11 @@ public class EnemyManager : MonoBehaviour
         StartCoroutine(SpawnEnemies());
     }
 
+    private void OnDestroy()
+    {
+        Portal.OnPortal -= OnNewScene;
+    }
+
     private IEnumerator SpawnEnemies()
     {
         yield return new WaitForSeconds(1.5f);
