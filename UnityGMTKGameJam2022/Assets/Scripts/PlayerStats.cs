@@ -18,17 +18,21 @@ public class PlayerStats : MonoBehaviour
     private void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
-        if (!healthBar) Debug.LogError("Health Bar is Null!");
-        if (!manaBar) Debug.LogError("Mana Bar is Null!");
+        if (!healthBar) Debug.LogWarning("Health Bar is Null!");
+        if (!manaBar) Debug.LogWarning("Mana Bar is Null!");
     }
 
     private void Start()
     {
+        if(healthBar)
+        {
+
         healthBar.SetMaxValue(maxHealth);
         healthBar.SetValue(maxHealth);
+        }
         currentHealth = maxHealth;
 
-        manaBar.SetMaxValue(maxMana);
+        if (manaBar) manaBar.SetMaxValue(maxMana);
         currentMana = 0;
     }
 
@@ -36,27 +40,27 @@ public class PlayerStats : MonoBehaviour
     {
         currentHealth += h;
         if (currentHealth > maxHealth) currentHealth = maxHealth;
-        healthBar.SetValue(currentHealth);
+        if(healthBar) healthBar.SetValue(currentHealth);
     }
 
     public void TakeDamage(int dmg)
     {
         currentHealth -= dmg;
         if (currentHealth < 0) currentHealth = 0;
-        healthBar.SetValue(currentHealth);
+        if (healthBar) healthBar.SetValue(currentHealth);
     }
 
     public void GainMana(int mana)
     {
         currentMana += mana;
         if (currentMana > maxMana) currentMana = maxMana;
-        manaBar.SetValue(currentMana);
+        if (manaBar) manaBar.SetValue(currentMana);
     }
 
     public void LoseMana(int mana)
     {
         currentMana -= mana;
         if (currentMana < 0) currentMana = maxMana;
-        manaBar.SetValue(currentMana);
+        if (manaBar) manaBar.SetValue(currentMana);
     }
 }
