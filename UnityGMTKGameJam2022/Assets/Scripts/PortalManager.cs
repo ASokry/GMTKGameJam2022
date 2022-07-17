@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PortalManager : MonoBehaviour
 {
-    public TimeManager timeManager;
+    private TimeManager timeManager;
     [SerializeField] private int spawnTimeSeconds = 0;
     [SerializeField] private GameObject portalPrefab;
     private GameObject spawnedPortal = null;
@@ -12,11 +12,23 @@ public class PortalManager : MonoBehaviour
     [SerializeField] private float portalSpawnPadding = 5f;
     [SerializeField] private float wildPortalChance = 150f;
 
-    // Update is called once per frame
+    private ZoneManager zoneManager;
+
+    private void Start()
+    {
+        timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
+        if (timeManager == null) { Debug.LogError("Time Manager is not in Persistent Scene!"); }
+        zoneManager = GameObject.FindGameObjectWithTag("ZoneManager").GetComponent<ZoneManager>();
+        if (zoneManager == null) { Debug.LogError("Zone manager is not in Persistent Scene!"); }
+    }
+
     void FixedUpdate()
     {
-        SpawnPortalWithinTime(spawnTimeSeconds);
-        WildPortalChance();
+        if (zoneManager.GetCurrentSceneName() == "wildzone" || zoneManager.GetCurrentSceneName() == "normalzone")
+        {
+            SpawnPortalWithinTime(spawnTimeSeconds);
+            WildPortalChance();
+        }
     }
 
     private void SpawnPortalWithinTime(int time)
@@ -40,12 +52,12 @@ public class PortalManager : MonoBehaviour
             if (dice > (timeManager.GetCurrentTime()/timeManager.GetStartSecondsTime()) * wildPortalChance)
             {
                 print("wild");
-                spawnedPortal.GetComponent<Portal>().SetPortalSceneIndex(2);
+                spawnedPortal.GetComponent<Portal>().SetPortalSceneName("wildzone");
             }
             else
             {
                 print("not wild");
-                spawnedPortal.GetComponent<Portal>().SetPortalSceneIndex(1);
+                spawnedPortal.GetComponent<Portal>().SetPortalSceneName("normalzone");
             }
         }
     }

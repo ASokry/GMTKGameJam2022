@@ -20,11 +20,8 @@ public class Mana: MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             PlayerStats player = collision.GetComponent<PlayerStats>();
-            if (!player.IsManaAtMax())
-            {
-                player.GainMana(manaValue);
-                Destroy(gameObject);
-            }
+            player.GainMana(manaValue);
+            Destroy(gameObject);
         }
     }
 }

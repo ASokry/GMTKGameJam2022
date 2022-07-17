@@ -6,8 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/zone-test.unity
-    guid: 9fb2c395aa73fbd44b88bf3a81034cf2
+    path: Assets/Scenes/Start.unity
+    guid: c39576575484c57459a29d8613a7436a
+  - enabled: 1
+    path: Assets/Scenes/Persistent_Objects.unity
+    guid: f225c791fc67f5846b9f59639113fb75
   - enabled: 1
     path: Assets/Scenes/normalzone.unity
     guid: 014db687dc6f0fd44a9a050c0604adcb

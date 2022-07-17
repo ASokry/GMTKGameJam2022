@@ -5,7 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class ZoneManager : MonoBehaviour
 {
-    public TimeManager timeManager;
+    private TimeManager timeManager;
+
+    private void Start()
+    {
+        timeManager = GameObject.FindGameObjectWithTag("TimeManager").GetComponent<TimeManager>();
+        if(timeManager == null) { Debug.LogError("Time Manager is not in Persistent Scene!"); }
+    }
 
     private void Update()
     {
@@ -14,7 +20,7 @@ public class ZoneManager : MonoBehaviour
 
     private void TimesUp()
     {
-        if (timeManager.GetCurrentTime() <= 0 && timeManager.GetActiveTimer())
+        if (timeManager.GetCurrentTime() <= 0 && timeManager.GetActiveTimer() && GetCurrentSceneName() != "Lose")
         {
             GoToLoseScene();
         }
@@ -22,6 +28,12 @@ public class ZoneManager : MonoBehaviour
 
     private void GoToLoseScene()
     {
-        SceneManager.LoadScene(4); // Go to lose scene
+        SceneManager.LoadScene("Lose"); // Go to lose scene
+    }
+
+    public string GetCurrentSceneName()
+    {
+        print(SceneManager.GetActiveScene().name);
+        return SceneManager.GetActiveScene().name;
     }
 }

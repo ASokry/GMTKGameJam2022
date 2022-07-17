@@ -17,9 +17,12 @@ public class ManaManager : MonoBehaviour
     [SerializeField] private int totalManaValueToSpawn = 18;
     private List<int> manaValuesToSpawn = new List<int>();
     private int spawnKey = 0;
+    private GameObject manaParent;
 
     private int currentTotalManaValue = 0;
     [SerializeField] private float manaSpawnPadding = 3f;
+
+    private ZoneManager zoneManager;
 
     private void Awake()
     {
@@ -27,16 +30,29 @@ public class ManaManager : MonoBehaviour
         {
             Debug.LogError("Mana Prefab list does not match amount of Mana Values!");
         }
+        Portal.OnPortal += OnNewScene;
+        zoneManager = GameObject.FindGameObjectWithTag("ZoneManager").GetComponent<ZoneManager>();
+        if (zoneManager == null) { Debug.LogError("Zone manager is not in Persistent Scene!"); }
+    }
+
+    private void OnNewScene()
+    {
+        StopCoroutine(ManaSpawnRoutine());
+        spawnKey = 0;
+        //manaParent = GameObject.FindGameObjectWithTag("ManaParent");
+        //if (manaParent == null) { Debug.LogError("Mana Parent is not in other Scene!"); }
+        
+        manaValuesToSpawn = BreakDownManaValues(totalManaValueToSpawn);
+        StartCoroutine(ManaSpawnRoutine());
     }
 
     private void Start()
     {
-        for (int m=0; m<manaValues.Length; m++)
+        for (int m = 0; m < manaValues.Length; m++)
         {
             manaDictionary.Add(manaValues[m], manaPrefabList[m]);
         }
-        manaValuesToSpawn = BreakDownManaValues(totalManaValueToSpawn);
-        StartCoroutine(ManaSpawnRoutine());
+        OnNewScene();
     }
 
     private List<int> BreakDownManaValues(int totalManaValue)
@@ -74,12 +90,25 @@ public class ManaManager : MonoBehaviour
 
     private IEnumerator ManaSpawnRoutine()
     {
-        while (spawnKey <= manaValuesToSpawn.Count - 1)
+        while (spawnKey <= manaValuesToSpawn.Count - 1 && CheckManaRountineScene())
         {
             SpawnMana(manaDictionary[manaValuesToSpawn[spawnKey]], RandomSpawnPointWithinScreen()); // note:change spawn location later
             spawnKey++;
             yield return new WaitForSeconds(1.5f);
         }
+
+        if (!CheckManaRountineScene())
+        {
+            foreach (GameObject mana in GameObject.FindGameObjectsWithTag("Mana"))
+            {
+                Destroy(mana);
+            }
+        }
+    }
+
+    private bool CheckManaRountineScene()
+    {
+        return zoneManager.GetCurrentSceneName() == "wildzone" || zoneManager.GetCurrentSceneName() == "normalzone";
     }
 
     private Vector2 RandomSpawnPointWithinScreen()
@@ -91,7 +120,8 @@ public class ManaManager : MonoBehaviour
 
     private void SpawnMana(GameObject manaPrefab, Vector2 manaSpawnPoint)
     {
-        Instantiate(manaPrefab, manaSpawnPoint, Quaternion.identity);
+        GameObject mana = Instantiate(manaPrefab, manaSpawnPoint, Quaternion.identity);
+        //mana.transform.SetParent(manaParent.transform);
     }
 
     private int CheckNumOfMana()

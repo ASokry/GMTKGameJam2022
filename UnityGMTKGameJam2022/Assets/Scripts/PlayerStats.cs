@@ -4,22 +4,34 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] private Bar healthBar;
+    private Bar healthBar;
     [SerializeField] private int maxHealth = 100;
     private int currentHealth = 0;
 
-    [SerializeField] private Bar manaBar;
+    private Bar manaBar;
     [SerializeField] private int maxMana = 100;
-    private int currentMana = 0;
+    [SerializeField] private int currentMana = 0;
 
     public int GetPlayerMana() { return currentMana; }
     public bool IsManaAtMax() { return currentMana == maxMana; }
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Bar>();
+        manaBar = GameObject.FindGameObjectWithTag("ManaBar").GetComponent<Bar>();
         if (!healthBar) Debug.LogError("Health Bar is Null!");
         if (!manaBar) Debug.LogError("Mana Bar is Null!");
+        Portal.OnPortal += OnNewScene;
+    }
+
+    private void OnNewScene()
+    {
+        
+    }
+
+    private void ReCenter()
+    {
+        transform.position = new Vector2(0, 0);
     }
 
     private void Start()

@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - TimeManager
+  - TimeText
+  - ManaManager
+  - ManaParent
+  - PortalManager
+  - ZoneManager
+  - HealthBar
+  - ManaBar
+  - Mana
   layers:
   - Default
   - TransparentFX

@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneIndexNum: 1
+  sceneName: normalzone
 --- !u!58 &2353943871908596481
 CircleCollider2D:
   m_ObjectHideFlags: 0
