@@ -8,19 +8,28 @@ public class EnemyManager : MonoBehaviour
     [SerializeField] private int numOfEnemies = 1;
     [SerializeField] private float spawnBoxSize = 10f;
     [SerializeField] private float padding = 5f;
+    private int zoneCount = 0;
+    private List<int> enemyProgressChart = new List<int>()
+    {
+        2,2,3,3,3,3,4,4,4,5
+    };
 
     private void Awake()
     {
         Portal.OnPortal += OnNewScene;
+        numOfEnemies = enemyProgressChart[zoneCount];
     }
 
     private void Start()
     {
-        OnNewScene();
+        StartCoroutine(SpawnEnemies());
     }
 
     private void OnNewScene()
     {
+        zoneCount++;
+        zoneCount = Mathf.Clamp(zoneCount, 0, enemyProgressChart.Count-1);
+        numOfEnemies = enemyProgressChart[zoneCount];
         StartCoroutine(SpawnEnemies());
     }
 

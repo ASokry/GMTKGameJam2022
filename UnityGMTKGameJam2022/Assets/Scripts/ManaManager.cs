@@ -42,7 +42,6 @@ public class ManaManager : MonoBehaviour
     public int GetTotalManaValueToSpawn() { return totalManaValueToSpawn; }
     private void Awake()
     {
-        totalManaValueToSpawn = manaProgressChart[zoneNum].x;
         if (manaPrefabList.Count != manaValues.Length)
         {
             Debug.LogError("Mana Prefab list does not match amount of Mana Values!");
@@ -56,8 +55,9 @@ public class ManaManager : MonoBehaviour
     {
         StopCoroutine(ManaSpawnRoutine());
         spawnKey = 0;
-        zoneNum++;
         totalManaValueToSpawn = manaProgressChart[zoneNum].x;
+        zoneNum++;
+        
         //manaParent = GameObject.FindGameObjectWithTag("ManaParent");
         //if (manaParent == null) { Debug.LogError("Mana Parent is not in other Scene!"); }
 
@@ -141,6 +141,31 @@ public class ManaManager : MonoBehaviour
     {
         GameObject mana = Instantiate(manaPrefab, manaSpawnPoint, Quaternion.identity);
         //mana.transform.SetParent(manaParent.transform);
+    }
+
+    public void SpawnManaInRadius(Vector2 t, float radius, int manaValue)
+    {
+        if (manaValue > 0)
+        {
+            List<int> valuesToSpawn = BreakDownManaValues(manaValue);
+            int count = valuesToSpawn.Count - 1;
+            while (count > 0)
+            {
+                SpawnMana(manaDictionary[valuesToSpawn[count]], RandomSpawnInRadius(t, radius));
+                count--;
+            }
+        }
+    }
+
+    private Vector2 RandomSpawnInRadius(Vector2 t, float r)
+    {
+        Vector2 randomPoint = (Vector2)t + Random.insideUnitCircle * r;
+        while (Vector2.Distance(t, randomPoint) <= 2.5f)
+        {
+            randomPoint = Random.insideUnitCircle * r;
+        }
+
+        return randomPoint;
     }
 
     private int CheckNumOfMana()

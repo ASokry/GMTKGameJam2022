@@ -26,7 +26,7 @@ public class ZoneManager : MonoBehaviour
         }
     }
 
-    private void GoToLoseScene()
+    public static void GoToLoseScene()
     {
         SceneManager.LoadScene("Lose"); // Go to lose scene
     }

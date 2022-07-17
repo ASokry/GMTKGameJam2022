@@ -81,6 +81,9 @@ MonoBehaviour:
   maxHealth: 3
   maxMana: 100
   currentMana: 0
+  dropRadius: 3.5
+  iFrames: 0
+  iFramesTime: 2
 --- !u!50 &6513855228846544352
 Rigidbody2D:
   serializedVersion: 4
