@@ -12,6 +12,10 @@ public class PlayerStats : MonoBehaviour
     [SerializeField] private int maxMana = 100;
     [SerializeField] private int currentMana = 0;
 
+    private bool iFrames = false;
+
+    private ManaManager manaManager;
+
     public int GetPlayerMana() { return currentMana; }
     public bool IsManaAtMax() { return currentMana == maxMana; }
 
@@ -46,47 +50,60 @@ public class PlayerStats : MonoBehaviour
 
         if (manaBar) manaBar.SetMaxValue(maxMana);
         currentMana = 0;
+
+        manaManager = GameObject.FindGameObjectWithTag("ManaManager").GetComponent<ManaManager>();
+        if (manaManager == null) { Debug.LogError("ManaManager is not in Persistent Scene!"); }
     }
 
     public void GainHp(int h)
     {
-        currentHealth += h;
-        if (currentHealth > maxHealth) currentHealth = maxHealth;
-        if(healthBar) healthBar.SetValue(currentHealth);
+        if (!iFrames)
+        {
+            currentHealth += h;
+            if (currentHealth > maxHealth) currentHealth = maxHealth;
+            if (healthBar) healthBar.SetValue(currentHealth);
+        }
     }
 
     public void LoseHp(int h)
     {
-        currentHealth -= h;
-        if (currentHealth < 0) currentHealth = 0;
-        if (healthBar) healthBar.SetValue(currentHealth);
+        if (!iFrames)
+        {
+            currentHealth -= h;
+            if (currentHealth < 0) currentHealth = 0;
+            if (healthBar) healthBar.SetValue(currentHealth);
+        }
     }
 
-    public void TakeDamage(int dmg, int mana)
+    public void TakeDamage(int dmg)
     {
         LoseHp(dmg);
-        LoseMana(mana);
+        LoseMana(CalculateManaToLose());
     }
 
     public void GainMana(int mana)
     {
-        //print("gain mana");
-        currentMana += mana;
-        if (currentMana > maxMana) currentMana = maxMana;
-        if (manaBar) manaBar.SetValue(currentMana);
+        if (!iFrames)
+        {
+            //print("gain mana");
+            currentMana += mana;
+            if (currentMana > maxMana) currentMana = maxMana;
+            if (manaBar) manaBar.SetValue(currentMana);
+        }
     }
 
     public void LoseMana(int mana)
     {
-        currentMana -= mana;
-        if (currentMana < 0) currentMana = maxMana;
-        if (manaBar) manaBar.SetValue(currentMana);
+        if (!iFrames)
+        {
+            currentMana -= mana;
+            if (currentMana < 0) currentMana = maxMana;
+            if (manaBar) manaBar.SetValue(currentMana);
+        }
     }
 
     private int CalculateManaToLose()
     {
-        ManaManager manaManager = GameObject.FindGameObjectWithTag("ManaManager").GetComponent<ManaManager>();
-        if (manaManager == null) { Debug.LogError("ManaManager is not in Persistent Scene!"); }
         int manaToLose = 0;
         List<Vector3Int> chart = manaManager.GetManaProgressChart();
         foreach (Vector3Int loss in chart)

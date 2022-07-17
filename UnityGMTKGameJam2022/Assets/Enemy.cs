@@ -13,12 +13,12 @@ public class Enemy : MonoBehaviour
         Target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.transform.tag == "Player")
         {
             var player = collision.transform.GetComponent<PlayerStats>();
-            
+            player.TakeDamage(damage);
         }
     }
 }
